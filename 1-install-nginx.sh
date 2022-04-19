@@ -13,16 +13,16 @@ sudo ufw allow 'Nginx HTTP'
 
 sudo ufw status
 
-systemctl enable nginx
-systemctl start nginx
-systemctl status nginx
+sudo systemctl enable nginx
+sudo systemctl restart nginx
+sudo systemctl status nginx
 
 ## Setting Up Server Blocks
 sudo mkdir -p /var/www/your_domain/html
 sudo chown -R $USER:$USER /var/www/your_domain/html
 sudo chmod -R 755 /var/www/your_domain
 
-cat << EOF > /var/www/your_domain/html/index.html
+sudo cat << EOF > /var/www/your_domain/html/index.html
 <html>
     <head>
         <title>Welcome to your_domain!</title>
@@ -33,7 +33,8 @@ cat << EOF > /var/www/your_domain/html/index.html
 </html>
 EOF
 
-cat << EOF >/etc/nginx/sites-available/your_domain
+sudo -i
+sudo cat << EOF >/etc/nginx/sites-available/your_domain
 server {
         listen 80;
         listen [::]:80;
@@ -48,10 +49,9 @@ server {
         }
 }
 EOF
-
+exit
 sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 
-wget nginx.conf
 mv nginx.conf /etc/nginx/nginx.conf
 
 sudo nginx -t
@@ -61,7 +61,6 @@ sudo systemctl restart nginx
 ## Secure Nginx with Let's Encrypt
 
 sudo apt install -y certbot python3-certbot-nginx
-sudo systemctl reload nginx
 sudo systemctl reload nginx
 
 sudo ufw allow 'Nginx Full'
