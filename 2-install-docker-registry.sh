@@ -46,5 +46,6 @@ htpasswd -Bc registry.password donny
 
 cd ~/docker-registry
 
+sudo apt install docker-compose -y
 docker-compose up -d
 sudo systemctl restart nginx

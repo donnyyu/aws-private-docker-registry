@@ -52,7 +52,7 @@ EOF
 exit
 sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 
-mv nginx.conf /etc/nginx/nginx.conf
+sudo mv nginx.conf /etc/nginx/nginx.conf
 
 sudo nginx -t
 sudo systemctl restart nginx
