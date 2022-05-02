@@ -49,6 +49,7 @@ server {
         }
 }
 EOF
+
 exit
 sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 
@@ -58,7 +59,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 
-## Secure Nginx with Let's Encrypt
+# Secure Nginx with Let's Encrypt
 
 sudo apt install -y certbot python3-certbot-nginx
 sudo systemctl reload nginx
