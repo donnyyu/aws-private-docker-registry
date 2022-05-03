@@ -33,8 +33,8 @@ sudo cat << EOF > /var/www/your_domain/html/index.html
 </html>
 EOF
 
-sudo -i
-sudo cat << EOF >/etc/nginx/sites-available/your_domain
+sudo chown -R $USER:$USER /etc/nginx
+cat << EOF >/etc/nginx/sites-available/your_domain
 server {
         listen 80;
         listen [::]:80;
@@ -50,7 +50,6 @@ server {
 }
 EOF
 
-exit
 sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 
 sudo mv nginx.conf /etc/nginx/nginx.conf
