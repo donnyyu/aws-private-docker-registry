@@ -47,13 +47,6 @@ cd ~/docker-registry/auth
 
 htpasswd -Bc registry.password donny
 
-cd ~/docker-registry
-
-sudo apt install docker-compose -y
-docker-compose up -d
-sudo systemctl restart nginx
-
-
 # Secure Nginx with Let's Encrypt
 
 sudo apt install -y certbot python3-certbot-nginx
@@ -64,3 +57,10 @@ sudo ufw delete allow 'Nginx HTTP'
 
 sudo ufw status
 sudo certbot --nginx -d your_domain 
+
+## start docker registry
+cd ~/docker-registry
+
+sudo apt install docker-compose -y
+docker-compose up -d
+sudo systemctl restart nginx
