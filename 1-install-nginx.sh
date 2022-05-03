@@ -33,38 +33,8 @@ sudo cat << EOF > /var/www/your_domain/html/index.html
 </html>
 EOF
 
-sudo chown -R $USER:$USER /etc/nginx
-cat << EOF >/etc/nginx/sites-available/your_domain
-server {
-        listen 80;
-        listen [::]:80;
-
-        root /var/www/your_domain/html;
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name your_domain;
-
-        location / {
-                try_files $uri $uri/ =404;
-        }
-}
-EOF
-
-sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
-
 sudo mv nginx.conf /etc/nginx/nginx.conf
 
 sudo nginx -t
 sudo systemctl restart nginx
 
-
-# Secure Nginx with Let's Encrypt
-
-sudo apt install -y certbot python3-certbot-nginx
-sudo systemctl reload nginx
-
-sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
-
-sudo ufw status
-sudo certbot --nginx -d your_domain 

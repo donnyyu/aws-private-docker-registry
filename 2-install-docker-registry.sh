@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo mkdir ~/docker-registry
-sudo cp docker-compose.yml ~/docker-registry/
+mkdir ~/docker-registry
+cp docker-compose.yml ~/docker-registry/
 cd ~/docker-registry
-sudo mkdir data
-
+mkdir data
+cd
 # docker-compose up
 
 cat << EOF >/etc/nginx/sites-available/your_domain
@@ -33,6 +33,9 @@ server {
         }
 }
 EOF
+sudo cp your_domain /etc/nginx/sites-available/your_domain
+
+sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx
 
@@ -49,3 +52,15 @@ cd ~/docker-registry
 sudo apt install docker-compose -y
 docker-compose up -d
 sudo systemctl restart nginx
+
+
+# Secure Nginx with Let's Encrypt
+
+sudo apt install -y certbot python3-certbot-nginx
+sudo systemctl reload nginx
+
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+
+sudo ufw status
+sudo certbot --nginx -d your_domain 
