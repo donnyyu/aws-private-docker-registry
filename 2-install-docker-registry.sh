@@ -7,7 +7,7 @@ mkdir data
 cd
 # docker-compose up
 
-cat << EOF >/etc/nginx/sites-available/your_domain
+cat << EOF >your_domain
 server {
         listen 80;
         listen [::]:80;
@@ -45,7 +45,7 @@ sudo apt install apache2-utils -y
 sudo mkdir ~/docker-registry/auth
 cd ~/docker-registry/auth
 
-htpasswd -Bc registry.password donny
+sudo htpasswd -Bc registry.password donny
 
 # Secure Nginx with Let's Encrypt
 

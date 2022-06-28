@@ -33,7 +33,7 @@ sudo cat << EOF > /var/www/your_domain/html/index.html
 </html>
 EOF
 
-sudo mv nginx.conf /etc/nginx/nginx.conf
+sudo cp nginx.conf /etc/nginx/nginx.conf
 
 sudo nginx -t
 sudo systemctl restart nginx
